@@ -3,7 +3,7 @@ import OrbitFinder as of
 import re
 import ast
 
-data = {'orbit':'', 'rot num':'', 'dep seq':''}
+data = {'orbit':'The orbit will show up here.', 'rot num':'', 'dep seq':''}
 
 with ui.column():
     with ui.card().tight():
@@ -13,7 +13,7 @@ with ui.column():
             #degree.on('blur', degree.validate)
             
             ui.label('Rotation Number:')
-            rot_num = ui.input('Ex: 2/5', validation={'Not a Positive Integer': lambda v: re.search('^\d+/\d+$', v)}).without_auto_validation().bind_value(data, 'rot num')
+            rot_num = ui.input('Ex: 2/5', validation={'Invalid Rotation Number': lambda v: re.search('^\\d+/\\d+$', v)}).without_auto_validation().bind_value(data, 'rot num')
             rot_num.on('blur', rot_num.validate)
             #with ui.column():
                 #numerator = ui.input('numerator', validation={'Not a Positive Integer': lambda v: v.isdigit()}).without_auto_validation()
@@ -22,9 +22,9 @@ with ui.column():
                 #denominator.on('blur', denominator.validate)
                 
             ui.label('Deployment Sequence:')
-            dep_seq = ui.input('Ex: (1,3)', validation={'Invalid Deployment Sequence': lambda v: re.search('^\(\d+(,\s*\d+)*\)$', v)}).without_auto_validation().bind_value(data, 'dep seq')
+            dep_seq = ui.input('Ex: (1,3)', validation={'Invalid Deployment Sequence': lambda v: re.search('^\\(\\d+(,\\s*\\d+)*\\)$', v)}).without_auto_validation().bind_value(data, 'dep seq')
             dep_seq.on('blur', dep_seq.validate)
-        ui.button('Calculate', on_click=lambda: do_calculation(data['rot num'], data['dep seq']) if(rot_num.value != '' and dep_seq.value != '') else ui.notify('Blank input field detected.'))
+        ui.button('Calculate', on_click=lambda: do_calculation(data['rot num'], data['dep seq']) if(rot_num.value != '' and dep_seq.value != '') else ui.notify('Blank Input Field Detected.'))
     with ui.card().style('width: 900px; height: 100px'):
         ui.label('Orbit:')
         ui.label().bind_text_from(data, 'orbit')
