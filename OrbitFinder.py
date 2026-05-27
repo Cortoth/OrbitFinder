@@ -1,5 +1,4 @@
 import numpy as np
-from manim_lamination_builder.points import NaryFraction
 
 deploymentSequence = [2,4,5]
 
